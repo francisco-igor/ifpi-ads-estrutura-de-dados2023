@@ -8,11 +8,20 @@ typedef struct arv {
 } *Arv;
 
 Arv arv_cria(char n, Arv sae, Arv sad) {
-  Arv p = malloc(1*sizeof(struct arv));
+  Arv p = malloc(sizeof(struct arv));
   p -> item = n;
   p -> esq = sae;
   p -> dir = sad;
   return p;
+}
+
+void destroi_arv(Arv *a) {
+  if (*a != NULL) {
+    destroi_arv(&((*a) -> esq));
+    destroi_arv(&((*a) -> dir));
+    free(*a);
+    *a = NULL;
+  }
 }
 
 void imprime(Arv a) {
@@ -35,6 +44,7 @@ int main() {
   Arv a = arv_cria('A', b, c);
 
   imprime(a);
-  
+  destroi_arv(&a);
+
   return 0;
 }
