@@ -29,31 +29,6 @@ Fila fila(int m) {
   return F;
 }
 
-int vaziaf(Fila F) { return (F->total == 0); }
-
-int cheiaf(Fila F) { return (F->total == F->max); }
-
-void enfileira(Itempf x, Fila F) {
-  if (cheiaf(F)) {
-    puts("Fila cheia!");
-    abort();
-  }
-  F->item[F->final] = x;
-  avanca(F->final);
-  F->total++;
-}
-
-Itempf desenfileira(Fila F) {
-  if (vaziaf(F)) {
-    puts("Fila vazia!");
-    abort();
-  }
-  Itempf x = F->item[F->inicio];
-  avanca(F->inicio);
-  F->total--;
-  return x;
-}
-
 void destroif(Fila *G) {
   free((*G)->item);
   free(*G);
