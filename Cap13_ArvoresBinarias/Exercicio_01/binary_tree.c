@@ -21,6 +21,17 @@ Arv arv_cria(char n, Arv sae, Arv sad) {
   return p;
 }
 
+void imprime(Arv a) {
+  if (a == NULL) {
+    printf("");
+  } else {
+    printf("<%d", a -> item);
+    imprime(a -> esq);
+    imprime(a -> dir);
+    printf(">");
+  }
+}
+
 int main() {
   Arv f = arv_cria(6, NULL, NULL);
   Arv e = arv_cria(5, NULL, NULL);
