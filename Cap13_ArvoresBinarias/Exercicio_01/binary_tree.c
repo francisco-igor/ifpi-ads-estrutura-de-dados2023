@@ -1,18 +1,5 @@
 #include "./fila.h"
 
-void emnivel(Arv a) {
-  if (a == NULL) return;
-  Fila f = fila(3);
-  enfileira(a, f);
-  while (!vaziaf(f)) {
-    a = desenfileira(f);
-    printf("%d ", a -> item);
-    if (a -> esq != NULL) enfileira(a -> esq, f);
-    if (a -> dir != NULL) enfileira(a -> dir, f);
-  }
-  destroif(&f);
-}
-
 Arv arv_cria(char n, Arv sae, Arv sad) {
   Arv p = malloc(1*sizeof(struct arv));
   p -> item = n;
@@ -40,7 +27,8 @@ int main() {
   Arv b = arv_cria(2, d, e);
   Arv a = arv_cria(1, b, c);
 
-  emnivel(a);
-
+  imprime(a);
+  destroif(&a);
+  
   return 0;
 }
