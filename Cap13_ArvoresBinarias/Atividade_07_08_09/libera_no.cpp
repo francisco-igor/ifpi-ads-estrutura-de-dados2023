@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 
 typedef struct arv {
 	char info;
@@ -65,20 +65,20 @@ int alturaArvore(Arv *no) {
         }
     }
 }
-   
+
 int procura(Arv *no, char valor) {
 	if (no == NULL) {
         return 0;
-    } else {
-        int esq = procura(no -> esq, valor);
-        int dir = procura(no -> esq, valor);
+	}
+	if (no -> info == valor) {
+		return 1;
+	}
+	else {
+		int esq = procura(no -> esq, valor);
+    	int dir = procura(no -> dir, valor);
 
-        if (no -> esq -> info == valor) {
-            return 1 + esq + dir;
-        } else {
-            return 0 + esq + dir;
-        }
-    }
+    	return esq + dir;
+	}
 }
 
 void destroiArvore(Arv **no) {
@@ -104,14 +104,31 @@ void removeSubArvore(Arv **no, char valor) {
 }
 	        
 int main() {
- 	Arv *c = arvore('c',NULL,NULL);
-	Arv *z = arvore('z',0,0);
+ 	Arv *c = arvore('c', NULL, NULL);
+	Arv *z = arvore('z', 0, 0);
  	Arv *o = arvore('o', c, z);
 
+	// imprime a arvore
 	imprime(o);
-	removeSubArvore(&o, 'c');
-	printf("\n");
+	std::cout << std::endl;
+
+	// imprime a quantidade de nos
+	std::cout << calculaQuantNos(o) << std::endl;
+
+	// imprime a quantidade de folhas
+	std::cout << calculaQuantNosFolha(o) << std::endl;
+
+	// imprime a altura da arvore
+	std::cout << alturaArvore(o) << std::endl;
+
+	// retorna quantas vezes o no foi encontrado
+	std::cout << procura(o, 'c') << std::endl;
+
+	// remove uma subarvore
+	removeSubArvore(&o, 'z');
 	imprime(o);
+
+	// destroi a arvore
 	destroiArvore(&o);
 
 	return 0;
